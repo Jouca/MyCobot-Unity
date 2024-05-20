@@ -67,7 +67,7 @@ public class JointController : MonoBehaviour
         //this.updateControlledPhysicalRobot();
 
         this.updateFollowGameObject(GameObject.Find("Sphere"));
-        //this.updateUnityRobot();
+        this.updateUnityRobot();
         this.controls();
     }
 
@@ -115,8 +115,8 @@ public class JointController : MonoBehaviour
         float angle = Mathf.Atan2(localDirection.x, localDirection.z) * Mathf.Rad2Deg;
 
         mc.SendCoords(new double[] {
-            -(gm.transform.position.z*877),
-            (gm.transform.position.x*877),
+            (gm.transform.position.z*877),
+            -(gm.transform.position.x*877),
             (gm.transform.position.y*1015),
             -angle,
             -90,
@@ -128,7 +128,6 @@ public class JointController : MonoBehaviour
     private void updateUnityRobot()
     {
         angles = mc.GetAngles();
-        Thread.Sleep(100);
 
         for (int i = angles.Length - 1; i >= 0; i--)
         {
