@@ -8,13 +8,13 @@ using UnityEngine;
 public class CameraMyCobot : WebCamera
 {
     [SerializeField] private FlipMode ImageFlip;
-    [SerializeField] private float Threshold = 96.4f;
+    [Range(0.0f, 255.0f)] public float Threshold;
     [SerializeField] private bool showProcessedImage = true;
 
     private Mat image;
-    private Mat processImage = new Mat();
+    private Mat processImage = new Mat(); 
 
-    Scalar red = new Scalar(0, 0, 255);
+    Scalar red = new Scalar(255, 0, 0);
 
     protected override bool ProcessTexture(WebCamTexture input, ref Texture2D output)
     {
@@ -22,6 +22,9 @@ public class CameraMyCobot : WebCamera
         Cv2.CvtColor(image, processImage, ColorConversionCodes.BGR2HSV);
         Scalar[] limits = getLimits(red);
         Cv2.InRange(processImage, limits[0], limits[1], processImage);
+
+        Point[][] contours = new Point[1][];
+        Cv2.FindContours(processImage, out contours, out HierarchyIndex[] hierarchy, RetrievalModes.External, ContourApproximationModes.ApproxSimple);
 
         if (output == null)
         {
@@ -35,7 +38,7 @@ public class CameraMyCobot : WebCamera
         return true;
     }
 
-    public static Scalar[] getLimits(Scalar color)
+    public Scalar[] getLimits(Scalar color)
     {
         // Transform color to HSV
         Mat hsvColor = new Mat();
@@ -43,9 +46,8 @@ public class CameraMyCobot : WebCamera
         Vec3b hsv = hsvColor.Get<Vec3b>(0, 0);
 
         // Define range of color in HSV
-        int tolerance = 30;
-        Scalar lower = new Scalar(hsv[0] - tolerance, 100, 100);
-        Scalar upper = new Scalar(hsv[0] + tolerance, 255, 255);
+        Scalar lower = new Scalar(hsv[2] - Threshold, 70, 70);
+        Scalar upper = new Scalar(hsv[2] + Threshold, 255, 255);
 
         return new Scalar[] { lower, upper };
     }

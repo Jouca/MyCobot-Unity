@@ -64,10 +64,10 @@ public class JointController : MonoBehaviour
     {
         this.changeJoint();
 
-        //this.updateControlledPhysicalRobot();
+        this.updateControlledPhysicalRobot();
 
-        this.updateFollowGameObject(GameObject.Find("Sphere"));
-        this.updateUnityRobot();
+        //this.updateFollowGameObject(GameObject.Find("Sphere"));
+        //this.updateUnityRobot();
         this.controls();
     }
 
