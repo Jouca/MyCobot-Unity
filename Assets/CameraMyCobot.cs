@@ -12,7 +12,7 @@ public class CameraMyCobot : WebCamera
     [SerializeField] private bool showProcessedImage = true;
 
     private Mat image;
-    private Mat processImage = new Mat(); 
+    private Mat processImage = new Mat();
 
     Scalar red = new Scalar(255, 0, 0);
 
@@ -26,9 +26,27 @@ public class CameraMyCobot : WebCamera
         Point[][] contours = new Point[1][];
         Cv2.FindContours(processImage, out contours, out HierarchyIndex[] hierarchy, RetrievalModes.External, ContourApproximationModes.ApproxSimple);
 
+        List<OpenCvSharp.Rect> rects = new List<OpenCvSharp.Rect>();
+        foreach (Point[] contour in contours)
+        {
+            OpenCvSharp.Rect rect = Cv2.BoundingRect(contour);
+            rects.Add(rect);
+        }
+
+        OpenCvSharp.Rect biggestRect = getBiggestRect(rects);
+
+        if (checkForCube(biggestRect))
+        {
+            Cv2.Rectangle(processImage, biggestRect, red, 2);
+            Cv2.PutText(processImage, "Cube", new Point(biggestRect.X, biggestRect.Y - 10), HersheyFonts.HersheySimplex, 0.5, red, 2);
+            Cv2.PutText(image, "Cube", new Point(biggestRect.X, biggestRect.Y - 10), HersheyFonts.HersheySimplex, 0.5, red, 2);
+            Point center = getCenterFromImage(biggestRect);
+            Debug.Log("Cube detected at: " + center);
+        }
+
         if (output == null)
         {
-            output = OpenCvSharp.Unity.MatToTexture(showProcessedImage ? processImage : image) ;
+            output = OpenCvSharp.Unity.MatToTexture(showProcessedImage ? processImage : image);
         }
         else
         {
@@ -46,9 +64,43 @@ public class CameraMyCobot : WebCamera
         Vec3b hsv = hsvColor.Get<Vec3b>(0, 0);
 
         // Define range of color in HSV
-        Scalar lower = new Scalar(hsv[2] - Threshold, 70, 70);
+        Scalar lower = new Scalar(hsv[2] - Threshold, 70, 170);
         Scalar upper = new Scalar(hsv[2] + Threshold, 255, 255);
 
         return new Scalar[] { lower, upper };
+    }
+
+    public OpenCvSharp.Rect getBiggestRect(List<OpenCvSharp.Rect> rects)
+    {
+        OpenCvSharp.Rect biggestRect = new OpenCvSharp.Rect();
+        int biggestArea = 0;
+        foreach (OpenCvSharp.Rect rect in rects)
+        {
+            int area = rect.Width * rect.Height;
+            if (area > biggestArea)
+            {
+                biggestArea = area;
+                biggestRect = rect;
+            }
+        }
+        return biggestRect;
+    }
+
+    public bool checkForCube(OpenCvSharp.Rect biggestRect)
+    {
+        // Check if it's a physical cube inside of the camera and not something else
+        return biggestRect.Width > 50 && biggestRect.Height > 50;
+    }
+
+    public Point getCenterFromImage(OpenCvSharp.Rect rect)
+    {
+        int x = rect.X + rect.Width / 2;
+        int y = rect.Y + rect.Height / 2;
+
+        // Convert to be in the middle of the screen
+        x -= processImage.Width / 2;
+        y -= processImage.Height / 2;
+
+        return new Point(x, y);
     }
 }
