@@ -38,8 +38,8 @@ public class CameraMyCobot : WebCamera
         if (checkForCube(biggestRect))
         {
             Cv2.Rectangle(processImage, biggestRect, red, 2);
-            Cv2.PutText(processImage, "Cube", new Point(biggestRect.X, biggestRect.Y - 10), HersheyFonts.HersheySimplex, 0.5, red, 2);
-            Cv2.PutText(image, "Cube", new Point(biggestRect.X, biggestRect.Y - 10), HersheyFonts.HersheySimplex, 0.5, red, 2);
+            Cv2.PutText(processImage, "Red object", new Point(biggestRect.X, biggestRect.Y - 10), HersheyFonts.HersheySimplex, 0.5, red, 2);
+            Cv2.PutText(image, "Red object", new Point(biggestRect.X, biggestRect.Y - 10), HersheyFonts.HersheySimplex, 0.5, red, 2);
             Point center = getCenterFromImage(biggestRect);
             Debug.Log("Cube detected at: " + center);
         }
@@ -64,7 +64,7 @@ public class CameraMyCobot : WebCamera
         Vec3b hsv = hsvColor.Get<Vec3b>(0, 0);
 
         // Define range of color in HSV
-        Scalar lower = new Scalar(hsv[2] - Threshold, 70, 170);
+        Scalar lower = new Scalar(hsv[2] - Threshold, 40, 110);
         Scalar upper = new Scalar(hsv[2] + Threshold, 255, 255);
 
         return new Scalar[] { lower, upper };
