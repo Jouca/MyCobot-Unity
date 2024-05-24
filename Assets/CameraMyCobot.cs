@@ -16,6 +16,8 @@ public class CameraMyCobot : WebCamera
 
     Scalar red = new Scalar(255, 0, 0);
 
+    static public Point movement;
+
     protected override bool ProcessTexture(WebCamTexture input, ref Texture2D output)
     {
         image = OpenCvSharp.Unity.TextureToMat(input);
@@ -41,7 +43,12 @@ public class CameraMyCobot : WebCamera
             Cv2.PutText(processImage, "Red object", new Point(biggestRect.X, biggestRect.Y - 10), HersheyFonts.HersheySimplex, 0.5, red, 2);
             Cv2.PutText(image, "Red object", new Point(biggestRect.X, biggestRect.Y - 10), HersheyFonts.HersheySimplex, 0.5, red, 2);
             Point center = getCenterFromImage(biggestRect);
-            Debug.Log("Cube detected at: " + center);
+            CameraMyCobot.movement = center;
+            //Debug.Log("Cube detected at: " + center);
+        } 
+        else
+        {
+            CameraMyCobot.movement = new Point(0, 0);
         }
 
         if (output == null)

@@ -12,6 +12,7 @@ using UnityEngine;
 using System.Threading;
 using Mycobot.csharp;
 using Unity.Robotics.UrdfImporter.Control;
+using System;
 
 public class JointController : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class JointController : MonoBehaviour
     MyCobot mc;
     int joint_id = 1;
 
-    private volatile float[] angles;
+    private volatile float[] angles = { 0, 0, 0, 0, 0, 0 };
 
     private float stiffness;
     private float damping;
@@ -32,6 +33,7 @@ public class JointController : MonoBehaviour
 
     private bool wait = false;
     private bool activatePump = false;
+    private float timer = 0;
 
     public enum RotationDirection { None = 0, Positive = 1, Negative = -1 };
 
@@ -62,12 +64,15 @@ public class JointController : MonoBehaviour
 
     private void Update()
     {
+        timer += Time.deltaTime;
+
         this.changeJoint();
+        //this.updateControlledPhysicalRobot();
 
-        this.updateControlledPhysicalRobot();
-
-        //this.updateFollowGameObject(GameObject.Find("Sphere"));
+        this.updateFollowGameObject(GameObject.Find("Sphere"));
         //this.updateUnityRobot();
+        this.updateObjectPosition(GameObject.Find("Sphere"));
+
         this.controls();
     }
 
@@ -118,7 +123,7 @@ public class JointController : MonoBehaviour
             (gm.transform.position.z*877),
             -(gm.transform.position.x*877),
             (gm.transform.position.y*1015),
-            -angle,
+            -angle + gm.transform.rotation.y,
             -90,
             0
         }, this.speed, 0);
@@ -127,7 +132,7 @@ public class JointController : MonoBehaviour
 
     private void updateUnityRobot()
     {
-        angles = mc.GetAngles();
+        if ((int)timer % 2 == 0) angles = mc.GetAngles();
 
         for (int i = angles.Length - 1; i >= 0; i--)
         {
@@ -151,6 +156,14 @@ public class JointController : MonoBehaviour
         {
             pumpHandler();
         }
+    }
+
+    private void updateObjectPosition(GameObject gm)
+    {
+        this.updateUnityRobot();
+        GameObject head = GameObject.Find("joint6");
+
+        gm.transform.RotateAround(new Vector3(0, head.transform.position.y, 0), Vector3.up, CameraMyCobot.movement.X / 100);
     }
 
     private void resetPosition()
