@@ -14,16 +14,18 @@ public class CameraMyCobot : WebCamera
     private Mat image;
     private Mat processImage = new Mat();
 
-    Scalar red = new Scalar(255, 0, 0);
-
     static public Point movement;
 
     protected override bool ProcessTexture(WebCamTexture input, ref Texture2D output)
     {
         image = OpenCvSharp.Unity.TextureToMat(input);
         Cv2.CvtColor(image, processImage, ColorConversionCodes.BGR2HSV);
-        Scalar[] limits = getLimits(red);
-        Cv2.InRange(processImage, limits[0], limits[1], processImage);
+        Mat redColorFilter = getLimits(image);
+
+        Cv2.BitwiseAnd(processImage, processImage, processImage, redColorFilter);
+        // Convert that to mat object
+        Cv2.CvtColor(processImage, processImage, ColorConversionCodes.BGR2GRAY);
+        Cv2.Threshold(processImage, processImage, Threshold, 255, ThresholdTypes.Binary);
 
         Point[][] contours = new Point[1][];
         Cv2.FindContours(processImage, out contours, out HierarchyIndex[] hierarchy, RetrievalModes.External, ContourApproximationModes.ApproxSimple);
@@ -39,9 +41,9 @@ public class CameraMyCobot : WebCamera
 
         if (checkForCube(biggestRect))
         {
-            Cv2.Rectangle(processImage, biggestRect, red, 2);
-            Cv2.PutText(processImage, "Red object", new Point(biggestRect.X, biggestRect.Y - 10), HersheyFonts.HersheySimplex, 0.5, red, 2);
-            Cv2.PutText(image, "Red object", new Point(biggestRect.X, biggestRect.Y - 10), HersheyFonts.HersheySimplex, 0.5, red, 2);
+            Cv2.Rectangle(processImage, biggestRect, new Scalar(255, 0, 0), 2);
+            Cv2.PutText(processImage, "Red object", new Point(biggestRect.X, biggestRect.Y - 10), HersheyFonts.HersheySimplex, 0.5, new Scalar(0, 0, 255), 2);
+            Cv2.PutText(image, "Red object", new Point(biggestRect.X, biggestRect.Y - 10), HersheyFonts.HersheySimplex, 0.5, new Scalar(0, 0, 255), 2);
             Point center = getCenterFromImage(biggestRect);
             CameraMyCobot.movement = center;
             //Debug.Log("Cube detected at: " + center);
@@ -63,18 +65,25 @@ public class CameraMyCobot : WebCamera
         return true;
     }
 
-    public Scalar[] getLimits(Scalar color)
+    public Mat getLimits(Mat img_original)
     {
-        // Transform color to HSV
-        Mat hsvColor = new Mat();
-        Cv2.CvtColor(new Mat(1, 1, MatType.CV_8UC3, color), hsvColor, ColorConversionCodes.BGR2HSV);
-        Vec3b hsv = hsvColor.Get<Vec3b>(0, 0);
+        Mat mask0 = new Mat();
+        Mat mask1 = new Mat();
 
-        // Define range of color in HSV
-        Scalar lower = new Scalar(hsv[2] - Threshold, 40, 110);
-        Scalar upper = new Scalar(hsv[2] + Threshold, 255, 255);
+        Mat img = img_original.Clone();
 
-        return new Scalar[] { lower, upper };
+        Scalar lowerred = new Scalar(0, 50, 50);
+        Scalar upperred = new Scalar(10, 255, 255);
+        Cv2.InRange(img, lowerred, upperred, mask0);
+
+        lowerred = new Scalar(170, 50, 50);
+        upperred = new Scalar(180, 255, 255);
+        Cv2.InRange(img, lowerred, upperred, mask1);
+
+        // join masks
+        Cv2.Add(mask0, mask1, mask0); // mask0 + mask1 = mask0
+
+        return mask0;
     }
 
     public OpenCvSharp.Rect getBiggestRect(List<OpenCvSharp.Rect> rects)

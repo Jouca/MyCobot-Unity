@@ -29,7 +29,7 @@ public class JointController : MonoBehaviour
     private float torque;
     private float acceleration;
 
-    public double test;
+    private float rotationCounter = 0;
 
     private bool wait = false;
     private bool activatePump = false;
@@ -160,10 +160,22 @@ public class JointController : MonoBehaviour
 
     private void updateObjectPosition(GameObject gm)
     {
-        this.updateUnityRobot();
-        GameObject head = GameObject.Find("joint6");
+        Debug.Log(CameraMyCobot.movement.X);
 
-        gm.transform.RotateAround(new Vector3(0, head.transform.position.y, 0), Vector3.up, CameraMyCobot.movement.X / 100);
+        if (CameraMyCobot.movement.X == 0) return;
+
+        if (CameraMyCobot.movement.X > 0) {
+            rotationCounter += Time.deltaTime;
+        }
+        else if (CameraMyCobot.movement.X < 0)
+        {
+            rotationCounter -= Time.deltaTime;
+        }
+
+        float newX = Mathf.Sin(rotationCounter * 0.08f) * -0.2f;
+        float newZ = Mathf.Cos(rotationCounter * 0.08f) * -0.2f;
+
+        gm.transform.position = new Vector3(newX, gm.transform.position.y, newZ);
     }
 
     private void resetPosition()
