@@ -81,7 +81,7 @@ public class JointController : MonoBehaviour
         return this.GetComponentsInChildren<ArticulationBody>();
     }
 
-    private void changeJoint()
+    public void changeJoint()
     {
         bool SelectionInput1 = Input.GetKeyDown("right");
         bool SelectionInput2 = Input.GetKeyDown("left");
@@ -103,7 +103,7 @@ public class JointController : MonoBehaviour
         }
     }
 
-    private void updateControlledPhysicalRobot()
+    public void updateControlledPhysicalRobot()
     {
         if (!wait)
         {
@@ -112,7 +112,7 @@ public class JointController : MonoBehaviour
         }
     }
 
-    private void updateFollowGameObject(GameObject gm)
+    public void updateFollowGameObject(GameObject gm)
     {
         GameObject head = GameObject.Find("joint6");
         Vector3 directionToTarget = new Vector3(0, head.transform.position.y, 0) - gm.transform.position;
@@ -130,7 +130,7 @@ public class JointController : MonoBehaviour
         Thread.Sleep(100);
     }
 
-    private void updateUnityRobot()
+    public void updateUnityRobot()
     {
         if ((int)timer % 2 == 0) angles = mc.GetAngles();
 
@@ -141,7 +141,7 @@ public class JointController : MonoBehaviour
         }
     }
 
-    private void controls()
+    public void controls()
     {
         // Reset position (R key)
         bool rKey = Input.GetKeyDown("r");
@@ -158,7 +158,7 @@ public class JointController : MonoBehaviour
         }
     }
 
-    private void updateObjectPosition(GameObject gm)
+    public void updateObjectPosition(GameObject gm)
     {
         Debug.Log(CameraMyCobot.movement.X);
 
@@ -178,7 +178,7 @@ public class JointController : MonoBehaviour
         gm.transform.position = new Vector3(newX, gm.transform.position.y, newZ);
     }
 
-    private void resetPosition()
+    public void resetPosition()
     {
         wait = true;
 
