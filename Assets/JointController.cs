@@ -65,15 +65,6 @@ public class JointController : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-
-        this.changeJoint();
-        //this.updateControlledPhysicalRobot();
-
-        this.updateFollowGameObject(GameObject.Find("Sphere"));
-        //this.updateUnityRobot();
-        this.updateObjectPosition(GameObject.Find("Sphere"));
-
-        this.controls();
     }
 
     private ArticulationBody[] getJoints()
