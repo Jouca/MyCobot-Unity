@@ -16,7 +16,7 @@ https://github.com/Jouca/MyCobot/archive/refs/heads/main.zip
 ## Documentation
 
 To interact with the library, make sure to import on your code the class JointController:
-```
+```cs
 JointController mycobot = new JointController();
 ```
 
