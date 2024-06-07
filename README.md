@@ -5,6 +5,10 @@
     <img src="https://external-preview.redd.it/Fgenl35V38AtzZ6BKiU0tmHRH_f4YjhNrMansQDYrkQ.jpg?width=1080&crop=smart&auto=webp&s=281b9d51aa0316e7962c013f645322aa083e4709" />
 </center>
 
+<div>
+   <p style="text-align: center;">[![Unity](https://img.shields.io/badge/Unity-%23000000.svg?logo=unity&logoColor=white)](#)</p>
+</div>
+
 ## Installation
 
 1. Make sure to install it via the repository source code:
