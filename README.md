@@ -1,5 +1,5 @@
 
-# MyCobot
+# MyCobot (IK & Camera version)
 
 <center>
     <img src="https://external-preview.redd.it/Fgenl35V38AtzZ6BKiU0tmHRH_f4YjhNrMansQDYrkQ.jpg?width=1080&crop=smart&auto=webp&s=281b9d51aa0316e7962c013f645322aa083e4709" />
