@@ -8,7 +8,7 @@
 
 1. Make sure to install it via the repository source code:
 ```
-https://github.com/Jouca/MyCobot/archive/refs/heads/main.zip
+[https://github.com/Jouca/MyCobot/archive/refs/heads/main.zip](https://github.com/Jouca/MyCobot/archive/refs/heads/main.zip)
 ```
 2. Drag **first** `Packages` folder into your Unity Project and after **make sure if you have already some packages installed that you need to update `packages-lock.json`**, after that make sure that Unity compiled the packages on the Project. Then, drag `Assets` folder into the project and compile it.
 3. The robot should appear in Unity Hierarchy.
