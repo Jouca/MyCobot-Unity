@@ -50,27 +50,23 @@ Here's the functions that you can use (most of them in a Unity **Update()** func
 Make MyCobot following a RED object:
 
 ```cs
-JointController mycobot = new JointController();
-
 private void Update()
 {
-    mycobot.updateFollowGameObject(GameObject.Find("Sphere"));
-    mycobot.updateUnityRobot();
-    mycobot.updateControlledPhysicalRobot();
-    mycobot.updateObjectPosition(GameObject.Find("Sphere"));
+    jointController.updateFollowGameObject(GameObject.Find("Sphere"));
+    jointController.updateUnityRobot();
+    jointController.updateControlledPhysicalRobot();
+    jointController.updateObjectPosition(GameObject.Find("Sphere"));
 }
 ```
 
 Control MyCobot using arrows keys:
 
 ```cs
-JointController mycobot = new JointController();
-
 private void Update()
 {
-    mycobot.changeJoint();
-    mycobot.updateControlledPhysicalRobot();
-    mycobot.controls();
+    jointController.changeJoint();
+    jointController.updateControlledPhysicalRobot();
+    jointController.controls();
 }
 ```
 
