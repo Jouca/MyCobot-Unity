@@ -48,12 +48,10 @@ Here's the functions that you can use (most of them in a Unity **Update()** func
 Control MyCobot using arrows keys:
 
 ```cs
-JointController mycobot = new JointController();
-
 private void Update()
 {
-    mycobot.changeJoint();
-    mycobot.updateControlledPhysicalRobot();
-    mycobot.controls();
+    jointController.changeJoint();
+    jointController.updateControlledPhysicalRobot();
+    jointController.controls();
 }
 ```
