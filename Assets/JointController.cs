@@ -99,7 +99,6 @@ public class JointController : MonoBehaviour
         if (!wait)
         {
             mc.SendOneAngle(this.joint_id, this.joints[this.joint_id].xDrive.target, this.speed);
-            Thread.Sleep(100);
         }
     }
 
@@ -118,7 +117,6 @@ public class JointController : MonoBehaviour
             -90,
             0
         }, this.speed, 0);
-        Thread.Sleep(100);
     }
 
     public void updateUnityRobot()
