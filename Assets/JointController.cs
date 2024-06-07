@@ -149,26 +149,6 @@ public class JointController : MonoBehaviour
         }
     }
 
-    public void updateObjectPosition(GameObject gm)
-    {
-        Debug.Log(CameraMyCobot.movement.X);
-
-        if (CameraMyCobot.movement.X == 0) return;
-
-        if (CameraMyCobot.movement.X > 0) {
-            rotationCounter += Time.deltaTime;
-        }
-        else if (CameraMyCobot.movement.X < 0)
-        {
-            rotationCounter -= Time.deltaTime;
-        }
-
-        float newX = Mathf.Sin(rotationCounter * 0.08f) * -0.2f;
-        float newZ = Mathf.Cos(rotationCounter * 0.08f) * -0.2f;
-
-        gm.transform.position = new Vector3(newX, gm.transform.position.y, newZ);
-    }
-
     public void resetPosition()
     {
         wait = true;
