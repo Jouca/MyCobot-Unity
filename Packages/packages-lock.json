@@ -9,27 +9,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.barracuda": {
-      "version": "3.0.0",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.burst": "1.6.0",
-        "com.unity.modules.jsonserialize": "1.0.0",
-        "com.unity.modules.imageconversion": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.burst": {
-      "version": "1.8.13",
-      "depth": 2,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.mathematics": "1.2.1",
-        "com.unity.modules.jsonserialize": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.collab-proxy": {
       "version": "2.3.1",
       "depth": 0,
@@ -56,13 +35,13 @@
       "depth": 0,
       "source": "builtin",
       "dependencies": {
-        "com.unity.ide.visualstudio": "2.0.22",
-        "com.unity.ide.rider": "3.0.28",
+        "com.unity.ide.visualstudio": "2.0.18",
+        "com.unity.ide.rider": "3.0.24",
         "com.unity.ide.vscode": "1.2.5",
         "com.unity.editorcoroutines": "1.0.0",
         "com.unity.performance.profile-analyzer": "1.2.2",
         "com.unity.test-framework": "1.1.33",
-        "com.unity.testtools.codecoverage": "1.2.5"
+        "com.unity.testtools.codecoverage": "1.2.4"
       }
     },
     "com.unity.ide.rider": {
@@ -86,13 +65,6 @@
     "com.unity.ide.vscode": {
       "version": "1.2.5",
       "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.mathematics": {
-      "version": "1.2.6",
-      "depth": 3,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -132,7 +104,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.testtools.codecoverage": {
-      "version": "1.2.5",
+      "version": "1.2.4",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -180,26 +152,6 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
-    },
-    "jp.keijiro.klak.testtools": {
-      "version": "https://github.com/keijiro/TestTools.git?path=/Packages/jp.keijiro.klak.testtools",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.unity.modules.audio": "1.0.0",
-        "com.unity.modules.unitywebrequest": "1.0.0",
-        "com.unity.modules.unitywebrequesttexture": "1.0.0",
-        "com.unity.modules.video": "1.0.0"
-      },
-      "hash": "f6629877391e810a995859c6e6a9cbcbcfe803a2"
-    },
-    "jp.keijiro.yolov4tiny": {
-      "version": "file:jp.keijiro.yolov4tiny",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.unity.barracuda": "2.1.0-preview"
-      }
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
