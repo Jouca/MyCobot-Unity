@@ -4,62 +4,30 @@ using UnityEngine;
 
 public class MyCobotMain : MonoBehaviour
 {
-    GameObject mycobot;
-    JointController jointController;
+    MyCobotHandler mycobot_handler;
+    public GameObject object_follow;
 
     // Start is called before the first frame update
     void Start()
     {
-        FindMyCobot();
-        RetrieveJointController();
-        
+        mycobot_handler = new MyCobotHandler(true, both: true, speed: 80);
     }
 
     // Update is called once per frame
     void Update()
     {
         // Insert your code for MyCobot here
-        // Example:
+        // Examples:
 
-        jointController.changeJoint();
-        jointController.updateControlledPhysicalRobot();
-        jointController.controls();
-    }
-    
-    private void FindMyCobot()
-    {
-        try
-        {
-            mycobot = GameObject.Find("myCobot");
-            if (mycobot == null)
-            {
-                throw new System.Exception("GameObject 'myCobot' not found.");
-            }
-            Debug.Log("GameObject 'myCobot' successfully found.");
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("An error occurred while finding 'myCobot': " + e.Message);
-        }
-    }
+        /*mycobot_handler.changeJoint();
+        mycobot_handler.controls();
+        mycobot_handler.updateRobot();*/
 
-    private void RetrieveJointController()
-    {
-        try
-        {
-            if (mycobot != null)
-            {
-                jointController = mycobot.GetComponentsInChildren<JointController>()[0];
-                Debug.Log("JointController successfully retrieved.");
-            }
-        }
-        catch (System.IndexOutOfRangeException e)
-        {
-            Debug.LogError("No JointController found in children of mycobot: " + e.Message);
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("An error occurred while retrieving JointController: " + e.Message);
-        }
+        /*GameObject gameObject = GameObject.Find("Sphere");
+        mycobot_handler.updateFollowGameObject(gameObject);
+        mycobot_handler.updateRobot();*/
+
+        mycobot_handler.updateFollowAR(object_follow);
+        mycobot_handler.updateRobot();
     }
 }

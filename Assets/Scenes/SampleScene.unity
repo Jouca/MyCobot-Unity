@@ -1400,14 +1400,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea1d6ac0a13ab14eb848a03e92331c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Surface: {fileID: 0}
-  cameraIndex: 0
-  webCamTexture: {fileID: 0}
-  renderedTexture: {fileID: 0}
-  forceFrontalCamera: 0
-  ImageFlip: 0
-  Threshold: 98.5
-  showProcessedImage: 1
 --- !u!4 &197236869 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: aeec82df84d3f1040b2048a8356a82ec, type: 3}
@@ -6723,6 +6715,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46398bc5d6905ad429a6d2d973afe002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1251547726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1251547728}
+  - component: {fileID: 1251547727}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1251547727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251547726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02a5d46084e49e4cbef1b59fd22a5b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1251547728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251547726}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.012078524, y: 0.20819938, z: -0.7510221}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1252979220
 GameObject:
   m_ObjectHideFlags: 8
@@ -7735,7 +7771,6 @@ GameObject:
   - component: {fileID: 1482231709}
   - component: {fileID: 1482231708}
   - component: {fileID: 1482231707}
-  - component: {fileID: 1482231710}
   m_Layer: 0
   m_Name: joint1
   m_TagString: Untagged
@@ -7856,18 +7891,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBaseLink: 0
---- !u!114 &1482231710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1482231705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b4f357f0863638468cb728b7108cc5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1515456255
 GameObject:
   m_ObjectHideFlags: 0
@@ -9905,7 +9928,7 @@ GameObject:
   - component: {fileID: 2141606581}
   - component: {fileID: 2141606582}
   m_Layer: 0
-  m_Name: firefighter
+  m_Name: myCobot
   m_TagString: robot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10500,3 +10523,4 @@ SceneRoots:
   - {fileID: 705507995}
   - {fileID: 1735160789}
   - {fileID: 2141606580}
+  - {fileID: 1251547728}
