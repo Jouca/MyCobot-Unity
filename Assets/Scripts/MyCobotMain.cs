@@ -27,7 +27,7 @@ public class MyCobotMain : MonoBehaviour
         mycobot_handler.updateFollowGameObject(gameObject);
         mycobot_handler.updateRobot();*/
 
-        mycobot_handler.updateFollowAR(object_follow);
-        mycobot_handler.updateRobot();
+        /*mycobot_handler.updateFollowAR(object_follow);
+        mycobot_handler.updateRobot();*/
     }
 }
